@@ -1,0 +1,357 @@
+<div class="container--contrast soft-half font-size-data flush--bottom">
+  <div class="js-accordion accordion is-active">
+    <div class="accordion__title  clearfix">
+      <h4 class="weight--normal grey flush float--left">Filter <strong>Results</strong></h4>
+      <!-- SEARCH FORM -->
+      {{
+        form_start(form, {
+          'attr': {
+            'id': 'js-filters-form'
+          }
+        })
+      }}
+      <!--  SEARCH FILTERS -->
+      <div class="accordion--icon zeta float--right  soft-quarter  hidden--print"></div>
+    </div>
+    <div class="accordion__content select-fix">
+      <div class="hidden">
+        {{ form_row(form.sale_type) }}
+        {{ form_row(form.with_prices_only) }}
+        {{ form_row(form.with_photos_only) }}
+      </div>
+
+      <div class="l-row display--flex flex-wrap--wrap">
+        <div class="l-column--large-12">
+          <fieldset class="container--faint soft-quarter">
+            <div class="container--light-grey">
+              <legend class="legend-style container--faint">Vehicle</legend>
+              <div class="container--light-grey">
+                <div class="l-row soft-quarter--sides">
+                  <div class="l-column--small-6">
+                    <label class="w-text-input"><span class="a11y">Category:</span>
+                      {{ form_row(form.category, { 'attr': {'class': 'full'} }) }}
+                    </label>
+                  </div><!-- column -->
+
+                  <div class="l-column--small-6">
+                    <label class="w-text-input"><span class="a11y">Make:</span>
+                      {{ form_row(form.make_name, { 'attr': {'class': 'full'} }) }}
+                    </label>
+                  </div><!-- column -->
+
+                </div><!-- row -->
+              </div>
+              <div class="container--light-grey">
+                <label class="w-text-input soft-quarter--sides"><span class="a11y">Model:</span>
+                  {{ form_row(form.model_name, { 'attr': {'class': 'full'} }) }}
+                </label>
+              </div>
+            </div>
+          </fieldset>
+
+        </div><!-- column -->
+
+        <div class="l-column--large-12 display--flex flex-direction--column align-items--center justify--center">
+          <legend class="legend-style container--faint">Year</legend>
+
+          <div id="mnmx-year" class="multi-slider">
+            <div class="slider-dot slider-min"></div>
+            <div class="slider-dot slider-max"></div>
+            <div class="slider-line"></div>
+          </div>
+
+          <div id="mnmx-year--text" class="multi-slider--text">Loading...</div>
+
+
+
+          <fieldset class="container--faint soft-quarter display--none">
+            <div class="container--light-grey">
+              <legend class="legend-style container--faint">Year</legend>
+              <label class="w-text-input soft-quarter--sides"><span class="a11y">Year start:</span>
+                 {{ form_row(form.year_start, { 'attr': {'class': 'full'} }) }}
+              </label>
+            </div>
+            <div class="container--light-grey">
+              <label class="w-text-input soft-quarter--sides"><span class="a11y">Year end:</span>
+                {{ form_row(form.year_end, { 'attr': {'class': 'full'} }) }}
+              </label>
+            </div>
+          </fieldset>
+        </div><!-- column -->
+
+        <div class="l-column--large-12 display--flex flex-direction--column align-items--center justify--center">
+          <legend class="legend-style container--faint">Price</legend>
+
+          <div id="mnmx-price" class="multi-slider">
+            <div class="slider-dot slider-min"></div>
+            <div class="slider-dot slider-max"></div>
+            <div class="slider-line"></div>
+          </div>
+
+          <div id="mnmx-price--text" class="multi-slider--text">Loading...</div>
+
+
+          <fieldset class="container--faint soft-quarter display--none">
+            <div class="container--light-grey">
+              <legend class="legend-style container--faint">Price</legend>
+              <label class="w-text-input soft-quarter--sides"><span class="a11y">Price low end:</span>
+                {{ form_widget(form.price_amount_start, { 'attr': {'class': 'full'} }) }}
+              </label>
+            </div>
+            <div class="container--light-grey">
+              <label class="w-text-input soft-quarter--sides"><span class="a11y">Price high end:</span>
+                {{ form_widget(form.price_amount_end, { 'attr': {'class': 'full'} }) }}
+              </label>
+            </div>
+          </fieldset>
+
+        </div><!-- column -->
+
+        <div class="l-column--large-12 display--flex flex-direction--column align-items--center justify--center">
+          <legend class="legend-style container--faint">Mileage</legend>
+
+          <div id="mnmx-mileage" class="multi-slider">
+            <div class="slider-dot slider-min"></div>
+            <div class="slider-dot slider-max"></div>
+            <div class="slider-line"></div>
+          </div>
+
+          <div id="mnmx-mileage--text" class="multi-slider--display">Loading...</div>
+
+
+          <fieldset class="container--faint soft-quarter push--bottom display--none">
+            <div class="container--light-grey">
+              <legend class="legend-style container--faint">Mileage</legend>
+              <label class="w-text-input soft-quarter--sides"><span class="a11y">Odometer low end</span>
+                {{ form_row(form.odometer_amount_start, { 'attr': {'class': 'full'} }) }}
+              </label>
+            </div>
+            <div class="container--light-grey">
+              <label class="w-text-input soft-quarter--sides"><span class="a11y">Odometer high end</span>
+                {{ form_row(form.odometer_amount_end, { 'attr': {'class': 'full'} }) }}
+              </label>
+            </div>
+         </fieldset>
+
+        </div><!-- column -->
+
+        <div class="l-column--large-12 soft-half--bottom">
+
+          <fieldset class="form--inline__rows align--center">
+            {{ form_widget(form.stock_num, { 'attr': {class: 'full black  soft--sides height--40 push-half--bottom', placeholder: 'Stock Number...'} } ) }}
+          </fieldset>
+          {{ form_row(form.sort, {
+            'id': 'js-sort-input'
+          }) }}
+          {{ form_row(form.direction, {
+            'id': 'js-direction-input'
+          }) }}
+
+          <a class="button reset-mnmx-range display--inline-block container--dark-grey hover--dark-grey" href="#" onclick="reload();">Reset Filters</a>
+          <script>
+            function reload(){
+
+              var selects = document.querySelectorAll('select');
+              for (var x = 0; x < selects.length; x++) {
+                selects[x].selectedIndex = 0;
+              }
+
+              var textInputs = document.querySelectorAll('input[type="text"]');
+              for (var x = 0; x < textInputs.length; x++) {
+                textInputs[x].value = '';
+              }
+
+            }
+          </script>
+
+          {% do form.stock_num.setRendered %}
+
+          <button type="submit" id="refine_search" name="refine_search" class="w-button button display--inline-block">Search by Filters &#x25B8;</button>
+
+        </div><!-- column -->
+
+
+
+        <div class="l-column--large-12 soft-half--bottom align--center">
+
+
+
+          {# {{ form_row(form.refine_search, { 'label': 'Search', 'attr': {'class': 'w-button button display--inline-block'} }) }} #}
+          {{ form_end(form, {'render_rest': false}) }}
+
+          <div class="align--center align--medium-left">
+            {# 
+              use app.request.pathinfo|replace({'/':''}) instead of 
+              'new-vehicles' or 'vehicles' because this way we don't have to 
+              make two separate twig files! 
+            #}
+            <form action="{{ page(app.request.pathinfo|replace({'/':''})) }}" method="get">
+              <div class="l-column--medium-12 hard">
+                <input class="full black soft--sides height--40 push-half--bottom" type="search" name="title" placeholder="Search by phrase...">
+              </div>
+              <div class="l-column--medium-12 hard">
+                <button type="submit" class="button search-widget__button soft-quarter--ends">Search by Phrase &#x25B8;</button>
+              </div>
+            </form>
+          </div>
+
+        </div><!-- column -->
+
+
+
+      </div><!-- row -->
+
+    </div><!-- accordion__content -->
+  </div><!-- accordion -->
+</div><!-- container -->
+
+
+{# <div class="container--contrast soft-half font-size-data">
+    <div class="js-accordion accordion accordion--small clickable">
+        <div class="accordion__title  clearfix">
+            <h4 class="grey flush float--left title-style">Filter Results</h4>
+            <div class="accordion--icon  float--right  soft-quarter  hidden--print visible--small"></div>
+        </div>
+
+        <div class="accordion__content  push--top  select-fix">
+            <a href="{{ page('all-vehicles') }}"
+               class="button button--show-all button--small button--grey  push-half flush--top  flush--left">Show
+                All</a>
+
+            <!-- SEARCH FORM -->
+            {{ form_start(form, { attr: { id: 'js-filters-form' } }) }}
+
+            <p><a class="js-reset__init" href="#" data-reset="trigger">Reset filters</a></p>
+
+            <!-- SEARCH FILTERS -->
+            <div class="hidden">
+                {{ form_row(form.sale_type, { attr: { checked: 'checked' }}) }}
+                {{ form_row(form.with_prices_only) }}
+                {{ form_row(form.with_photos_only) }}
+            </div>
+
+            <fieldset>
+                <legend>Vehicle</legend>
+
+                <div class="push-half--bottom">
+                    <label>
+                        <span class="a11y">Category:</span>
+                        <div class="select select--custom full">
+                            {{ form_widget(form.category) }}
+                        </div>
+                    </label>
+                </div>
+
+                <div class="display--flex-selector">
+                    <label class="display--inline-block flex-column--medium-6">
+                        <span class="a11y">Make:</span>
+                        <div class="select select--custom select-make full">
+                            {{ form_widget(form.make_name) }}
+                        </div>
+                    </label>
+
+                    <label class="display--inline-block flex-column--medium-6">
+                        <span class="a11y">Model:</span>
+                        <div class="select select--custom  select-model full">
+                            {{ form_widget(form.model_name) }}
+                        </div>
+                    </label>
+                </div>
+
+            </fieldset>
+
+            <fieldset>
+                <legend>Year</legend>
+
+                <div class="display-flex-selector-large">
+                    <label class="display--inline-block">
+                        <span class="a11y">Year start:</span>
+                        <div class="select select--custom full">
+                            {{ form_widget(form.year_start) }}
+                        </div>
+                    </label>
+
+                    <span class="hidden--1136">to</span>
+
+                    <label class="display--inline-block">
+                        <span class="a11y">Year end:</span>
+                        <div class="select select--custom full">
+                            {{ form_widget(form.year_end) }}
+                        </div>
+                    </label>
+                </div>
+
+            </fieldset>
+
+            <fieldset>
+                <legend>Price</legend>
+                <div class="display-flex-selector-large">
+                    <label class="display--inline-block">
+                        <span class="a11y">Price low end:</span>
+                        <div class="select select--custom full">
+                            {{ form_widget(form.price_amount_start) }}
+                        </div>
+                    </label>
+
+                    <span class="hidden--1136">to</span>
+
+                    <label class="display--inline-block">
+                        <span class="a11y">Price high end:</span>
+                        <div class="select select--custom full">
+                            {{ form_widget(form.price_amount_end) }}
+                        </div>
+                    </label>
+                </div>
+            </fieldset>
+
+            <fieldset class="push--bottom">
+                <legend>Mileage</legend>
+                <div class="display-flex-selector-large">
+                    <label class="display--inline-block">
+                        <span class="a11y">Odometer low end</span>
+                        <div class="select select--custom full">
+                            {{ form_widget(form.odometer_amount_start) }}
+                        </div>
+                    </label>
+
+                    <span class="hidden--1136">to</span>
+
+                    <label class="display--inline-block">
+                        <span class="a11y">Odometer high end</span>
+                        <div class="select select--custom full">
+                            {{ form_widget(form.odometer_amount_end) }}
+                        </div>
+                    </label>
+                </div>
+            </fieldset>
+
+            <fieldset class="form--inline__rows">
+                <legend>Engine &amp; Drive</legend>
+                {{ form_row(form.transmission_type) }}
+            </fieldset>
+
+            <fieldset>
+                <label class="form--inline">
+                    <span class="display--inline-block push-quarter--right">
+                        <span class="select select--custom">
+                            {{ form_widget(form.drive_type) }}
+                        </span>
+                    </span>
+                    <span class="label-text">wheel drive</span>
+                </label>
+            </fieldset>
+
+            {{ form_row(form.sort, { id: 'js-sort-input' }) }}
+            {{ form_row(form.direction, { id: 'js-direction-input' }) }}
+
+            {% do form.stock_num.setRendered %}
+
+            <div class="push--top soft-half--bottom">
+                 {{ form_row(form.refine_search, { 'attr': {'class':'button--refine full'}, 'label': 'Refine Search'}) }}
+            </div>
+
+            {{ form_end(form, {render_rest: false}) }}
+
+        </div><!-- accordion__content -->
+    </div><!-- accordion -->
+</div><!-- container --> #}
